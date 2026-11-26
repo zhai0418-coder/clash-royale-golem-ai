@@ -10,3 +10,8 @@ archive/
 experiment_*/
 evaluation_*/
 captures/
+src/clasher_new/runs/
+
+__pycache__/
+
+__pycache__/

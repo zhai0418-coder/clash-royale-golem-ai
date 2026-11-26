@@ -9,20 +9,20 @@ from __future__ import annotations
 
 import numpy as np
 
-
 ENTITY_NAMES = (
     "None", "Knight", "MiniPekka", "Arrows", "Minions", "Archer",
     "Musketeer", "Fireball", "Giant", "King_PrincessTowers", "KingTower",
     "ArrowsSpell", "FireballSpell",
+    "Golem", "Golemite", "BabyDragon", "Wizard", "SkeletonArmy",
+    "Skeleton", "DarkPrince", "Rage", "RageSpell",''
 )
 
-# The default deck in environment.py.  Keeping the costs here makes this
-# policy independent of card_utils' data-file working-directory assumptions.
 ELIXIR_COST = {
     "Knight": 3, "MiniPekka": 4, "Arrows": 3, "Minions": 3,
     "Archer": 3, "Musketeer": 4, "Fireball": 4, "Giant": 5,
+    "Golem": 8, "BabyDragon": 4, "Wizard": 5, "SkeletonArmy": 3,
+    "DarkPrince": 4, "Rage": 2,
 }
-
 
 # Spells at level 11, from the card data: area radius (tiles) and troop damage.
 SPELLS = {"Fireball": (2.5, 688), "Arrows": (3.5, 3 * 122)}

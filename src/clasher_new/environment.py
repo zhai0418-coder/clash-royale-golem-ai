@@ -17,20 +17,22 @@ import player
 from card_utils import Card
 from core import Position
 
-player_0_deck = ['Knight', 'MiniPekka', 'Arrows', 'Minions', 'Musketeer', 'Fireball', 'Giant', 'Archer']
-player_1_deck = ['Minions', 'Archer', 'MiniPekka', 'Musketeer', 'Giant', 'Fireball', 'Arrows', 'Knight']
+player_0_deck = ['Golem', 'BabyDragon', 'Wizard', 'MiniPekka', 'SkeletonArmy', 'DarkPrince', 'Rage', 'Arrows']
+player_1_deck = ['Golem', 'BabyDragon', 'Wizard', 'MiniPekka', 'SkeletonArmy', 'DarkPrince', 'Rage', 'Arrows']
 INITIAL_DECKS = (tuple(player_0_deck), tuple(player_1_deck))
 
 # Index 0 means an empty tile. Spells appear on the board as their projectiles.
 entity_names = ['None', 'Knight', 'MiniPekka', 'Arrows', 'Minions', 'Archer',
                 'Musketeer', 'Fireball', 'Giant', 'King_PrincessTowers',
-                'KingTower', 'ArrowsSpell', 'FireballSpell']
+                'KingTower', 'ArrowsSpell', 'FireballSpell',
+                'Golem', 'Golemite', 'BabyDragon', 'Wizard', 'SkeletonArmy',
+                'Skeleton', 'DarkPrince', 'Rage', 'RageSpell','']
 # 'troop' is the towers' type ("tower troop"); actual troops are 'character'.
 card_types = ['troop', 'character', 'spell', 'building']
 ENTITY_ID = {name: i for i, name in enumerate(entity_names)}
 CARD_TYPE_ID = {name: i for i, name in enumerate(card_types)}
 
-FRAMES = 8            # observation history length, one frame per half second
+FRAMES = 8            # observation history length, one frame per half secondSSSSSS
 CARD_SLOTS = 4
 BANK_TARGETS = (4, 5, 6, 7, 8, 9, 10)  # slot 5 + i banks until elixir >= BANK_TARGETS[i]
 DECISION_SECONDS = 0.5
@@ -268,7 +270,7 @@ class CREnv(gym.Env):
             y = int(min(max(py, 0), 31))
             # ponytail: one entity per tile; later entities overwrite earlier ones.
             frame[y][x] = np.array([
-                ENTITY_ID[entity.name], CARD_TYPE_ID[data.type],
+                ENTITY_ID[entity.name], CARD_TYPE_ID.get(data.type, CARD_TYPE_ID['spell']), 
                 entity.player != player_id,  # 0 = own, 1 = enemy
                 data.elixir, data.speed, int(data.is_air_unit),
                 int(data.attack_ground), int(data.attack_air),

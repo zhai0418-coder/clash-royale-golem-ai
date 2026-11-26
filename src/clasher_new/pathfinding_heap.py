@@ -92,8 +92,10 @@ class EntityPathfinder:
                         self.goals.add((x, y))
         # The second step is to filter goals, only keep the closest one.
         # Not cached: it depends on the exact start position, not just the start cell.
+        if not self.goals:
+            return [self.target_position]
         self.goal = min(self.goals, key=lambda c: cell_to_position(c).distance_to(self.target_position)+cell_to_position(c).distance_to(self.start_position))
-
+        
         # The A* search depends only on start cell, goal cell, mover size and flying.
         path_key = ('path', self.start_cell, self.goal, mover_radius, flies)
         if path_key not in cache:
